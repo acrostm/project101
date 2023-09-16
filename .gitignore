@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+frontend/.idea
+backend/.idea
+backend/node_modules
+backend/packge-lock.json
+backend/.DS_Store
