@@ -10,14 +10,14 @@
     "username": "root",
     "password": "zpp112004",
     "database": "project101_test",
-    "host": "127.0.0.1",
+    "host": "47.254.80.146",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "zpp112004",
     "database": "project101_production",
-    "host": "127.0.0.1",
+    "host": "47.254.80.146",
     "dialect": "mysql"
   }
 }
