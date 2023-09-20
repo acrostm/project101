@@ -1,22 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/user');
+// const User  = require('../models/user');
+const models = require('../models');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
 
-    // const userId = parseInt(req.params.userId);
-
+    const userId = req.params.userId;
     // Use Sequelize to query the User model for the user with the specified ID
-    const userData = await User.findAll({
-      where: {
-        firstName: 'Jiach'
-      }
-    });
-
-    if(!userData) {
-      return res.status(404).json({ error: 'User not found' });
+    let userData = await models.User.findByPk(userId);
+    // 检查是否有匹配的用户
+    if (userData.length === 0) {
+      // 返回空数组表示没有匹配的用户
+      return res.json([]);
     }
 
     // Send the user's information as a JSON response
