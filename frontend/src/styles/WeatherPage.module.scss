@@ -109,18 +109,19 @@
 
 .search-results-container {
   position: fixed;
-  top: 28%;
+  top: 320px;
   left: 50%;
   width: 360px;
   transform: translate(-50%, -50%);
   z-index: 999; /* 控制浮动窗口的层级 */
-  background: rgba(205, 250, 250, 0.98);
+  background: rgba(205, 250, 250, 0.97);
+  box-shadow: 0 0 15px rgba(4, 29, 40, 0.6);
   border-radius: 13px;
   overflow: hidden;
   cursor: pointer;
   .search-result {
     padding: 10px;
-    margin: 0px;
+    margin: 0;
     display: flex;
     justify-content: center;
     &:hover {
