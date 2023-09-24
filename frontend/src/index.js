@@ -4,7 +4,19 @@ import './index.css';
 import App from './App';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+let protocol = window.location.protocol; //协议
+let hostname = window.location.hostname; //主机
+let reg = /^localhost+/;
+
+if(reg.test(host)) {
+  //若本地项目调试使用
+    axios.defaults.baseURL = 'http://localhost:3001';
+} else {
+    //动态请求地址             协议               主机
+    axios.defaults.baseURL = protocol + "//" + hostname  +":3001";
+}
+
+// axios.defaults.baseURL = 'http://47.254.80.146:3001';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
