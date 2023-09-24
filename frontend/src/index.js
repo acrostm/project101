@@ -8,11 +8,11 @@ let protocol = window.location.protocol; //协议
 let hostname = window.location.hostname; //主机
 let reg = /^localhost+/;
 
-if(reg.test(host)) {
+if(reg.test(hostname)) {
   //若本地项目调试使用
     axios.defaults.baseURL = 'http://localhost:3001';
 } else {
-    //动态请求地址             协议               主机
+    //动态请求地址             协议               主机        端口
     axios.defaults.baseURL = protocol + "//" + hostname  +":3001";
 }
 
