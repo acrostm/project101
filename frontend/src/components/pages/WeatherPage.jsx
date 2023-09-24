@@ -15,7 +15,7 @@ import direction_icon from '../../assets/images/weather_icons/direction.png';
 
 const WeatherPage = () => {
     const [weatherData, setWeatherData] = useState(null);
-    const [cityName, setCityName] = useState("London"); // 存储显示的城市名称
+    const [cityName, setCityName] = useState("Burnaby"); // 存储显示的城市名称
     const [temperature, setTemperature] = useState(""); // 存储温度
     const [windSpeed, setWindSpeed] = useState(""); // 存储风速
     const [humidity, setHumidity] = useState(""); // 存储湿度
@@ -25,14 +25,6 @@ const WeatherPage = () => {
     const [searchResults, setSearchResults] = useState([]); // 存储搜索结果
 
     useEffect(() => {
-        // 发起请求获取天气数据
-        axios.get('/weather/getWeather')
-            .then(res => {
-                setWeatherData(res.data); // 将获取的天气数据保存到状态中
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-            });
 
         handleSearchCity(cityName);
     }, []);
@@ -62,7 +54,6 @@ const WeatherPage = () => {
             return; // 如果城市名为空，不执行搜索
         }
 
-        console.log('city', city);
 
         axios.post('/weather/getWeatherByCityName', { cityName: city })
             .then(res => {
@@ -80,6 +71,7 @@ const WeatherPage = () => {
             .catch(error => {
                 console.error('Error fetching weather data:', error);
             });
+        setSearchResults([]);
     }
 
     // handle 搜索框自动补全
@@ -88,7 +80,7 @@ const WeatherPage = () => {
         console.log(value);
 
         // 发送搜索请求
-        axios.post('/weather/searchCity', { input: value })
+        axios.post('/searchCity', { input: value })
             .then((res) => {
                 setSearchResults(res.data.cityNames); // 更新搜索结果
             })
@@ -106,31 +98,32 @@ const WeatherPage = () => {
         <div className={styles.container}>
             <div className={styles.topBar}>
                 <input
+                    className={styles['search-input']}
                     type="text"
                     placeholder="Search City"
                     value={searchedCity}
                     onChange={(e) => setSearchedCity(e.target.value)} // 更新 searchedCity
                     onInput={handleInputChange} // 添加 onInput 事件处理程序
                 />
-                {searchResults.length > 0 && (
-                    <div className={styles['search-results']}>
-                        {searchResults.map((result, index) => (
-                            <div key={index} className={styles['search-result']} onClick={() => handleSearchCity(result.split(',')[0].trim())}>
-                                {result}
-                            </div>
-                        ))}
-                    </div>
-                )}
-                <div className={styles['search-icon']} onClick={() => handleSearchCity(searchedCity)}>
-                    <img src={search_icon} alt="search"/>
-                </div>
+                {/*<div className={styles['search-icon']} onClick={() => handleSearchCity(searchedCity)}>*/}
+                {/*    <img src={search_icon} alt="search"/>*/}
+                {/*</div>*/}
             </div>
+            {searchResults.length > 0 && (
+                <div className={styles['search-results-container']}>
+                    {searchResults.map((result, index) => (
+                        <div key={index} className={styles['search-result']} onClick={() => handleSearchCity(result.split(',')[0].trim())}>
+                            {result}
+                        </div>
+                    ))}
+                </div>
+            )}
             <div className={styles['weather-image']}>
                 <img src={weatherIcon} alt=""/>
             </div>
             <div className={styles['weather-temp']}>{temperature}°C</div>
             <div className={styles['city-container']}>
-                {cityName === "Burnaby" && <img src={direction_icon} alt="" />}
+                {(cityName === "Burnaby" || cityName === "Vancouver") && <img src={direction_icon} alt="" />}
                 <div className={styles['weather-location']}>{cityName}</div>
                 <img src={getWeatherIcon()} alt="" />
             </div>

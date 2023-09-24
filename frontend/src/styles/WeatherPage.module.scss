@@ -27,7 +27,7 @@
   font-weight: 400;
 }
 
-input::placeholder {
+.search-input::placeholder {
   color: #626262;
   font-size: 20px;
   font-weight: 500;
@@ -107,3 +107,24 @@ input::placeholder {
   margin-top: 10px;
 }
 
+.search-results-container {
+  position: fixed;
+  top: 28%;
+  left: 50%;
+  width: 360px;
+  transform: translate(-50%, -50%);
+  z-index: 999; /* 控制浮动窗口的层级 */
+  background: rgba(205, 250, 250, 0.98);
+  border-radius: 13px;
+  overflow: hidden;
+  cursor: pointer;
+  .search-result {
+    padding: 10px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    &:hover {
+      background: rgba(217, 210, 243, 0.9);
+    }
+  }
+}
