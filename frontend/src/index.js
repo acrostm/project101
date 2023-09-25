@@ -13,7 +13,7 @@ if(reg.test(hostname)) {
     axios.defaults.baseURL = 'http://localhost:3001';
 } else {
     //动态请求地址             协议               主机        端口
-    axios.defaults.baseURL = protocol + "//" + hostname  +":3001";
+    axios.defaults.baseURL = 'http:' + "//" + hostname  +":3001";
 }
 
 // axios.defaults.baseURL = 'http://47.254.80.146:3001';
