@@ -11,12 +11,14 @@ let reg = /^localhost+/;
 if(reg.test(hostname)) {
   //若本地项目调试使用
     axios.defaults.baseURL = 'http://localhost:3001';
-} else {
+} else if (protocol !== "https:"){
     //动态请求地址             协议               主机        端口
-    axios.defaults.baseURL = 'http:' + "//" + hostname  +":3001";
+    axios.defaults.baseURL = protocol + "//" + hostname  +":3001";
 }
-
-// axios.defaults.baseURL = 'http://47.254.80.146:3001';
+else {
+      //动态请求地址             协议               主机        端口
+    axios.defaults.baseURL = protocol + "//" + 'api.'+ hostname.slice(1).join('.')  +":3001";
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
