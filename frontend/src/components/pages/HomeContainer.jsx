@@ -86,7 +86,7 @@ function App() {
             <div className={styles.container}>
                 <div className={styles.top}>
                     <div className={styles.temp}>
-                        <p>Now | {weatherData.temperature.toFixed()} °C</p>
+                        <p>Now {weatherData.temperature} °C</p>
                     </div>
                     <div className={styles.line}></div>
                     <div className={styles.location}>
