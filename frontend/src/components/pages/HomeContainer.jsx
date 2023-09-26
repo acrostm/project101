@@ -13,9 +13,11 @@ function App() {
 
 
     useEffect(() => {
-        handleSearchCity("Burnaby");
         getUserIP();
+        handleSearchCity('Burnaby');
     }, []);
+
+
 
     const handleSearchCity = (city) => {
         if (!city) {
@@ -48,11 +50,10 @@ function App() {
             });
     };
 
-    const getUserIP = () => {
-        axios.get('/userInfo/userIP')
+    const getUserIP = async () => {
+        await axios.get(`https://geo.ipify.org/api/v2/country,city,vpn?apiKey=at_KCK8e5db8uFnjQzQHn4Oi7OGzpBq6`)
             .then(res => {
                 setUserInfo(res.data);
-                console.log(userInfo);
             })
             .catch(error => {
                 console.error('Error fetching user IP:', error);
@@ -86,7 +87,7 @@ function App() {
             <div className={styles.container}>
                 <div className={styles.top}>
                     <div className={styles.temp}>
-                        <p>Now {weatherData.temperature} °C</p>
+                        <p>Local {weatherData.temperature} °C</p>
                     </div>
                     <div className={styles.line}></div>
                     <div className={styles.location}>
