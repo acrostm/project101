@@ -83,17 +83,62 @@ h1 {
   transform: rotate(269deg);
 }
 
-.app .bottom {
-  display: flex;
-  justify-content: space-evenly;
-  text-align: center;
+.app .bottom_container {
   width: 100%;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 12px;
-  background-color: rgba(255,255,255, 0.2);
+  background-color: rgba(138, 138, 138, 0.4);
+
+  .bottom {
+    display: flex;
+    justify-content: space-evenly;
+    vertical-align: bottom;
+    margin: 1em auto;
+    padding: 1em;
+  }
 }
 
 .bold {
   font-weight: 700;
+}
+
+.search-results-container {
+  position: fixed;
+  top: 180px;
+  left: 50%;
+  width: 360px;
+  transform: translate(-50%, -50%);
+  z-index: 999; /* 控制浮动窗口的层级 */
+  background: rgba(138, 138, 138, 0.6);
+  border: #f0f0f0 solid 2px;
+  border-radius: 13px;
+  overflow: hidden;
+  cursor: pointer;
+  .search-result {
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    &:hover {
+      background: rgba(69, 85, 152, 0.9);
+    }
+  }
+}
+
+.line {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    margin: 0.3rem auto;
+    width: 30%;
+    height: 3px; /* 分割线的高度 */
+    background-color: #ffffff; /* 分割线的颜色 */
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 通过偏移来垂直居中 */
+    border-radius: 1px;
+  }
 }

@@ -105,9 +105,6 @@ const WeatherPage = () => {
                     onChange={(e) => setSearchedCity(e.target.value)} // 更新 searchedCity
                     onInput={handleInputChange} // 添加 onInput 事件处理程序
                 />
-                {/*<div className={styles['search-icon']} onClick={() => handleSearchCity(searchedCity)}>*/}
-                {/*    <img src={search_icon} alt="search"/>*/}
-                {/*</div>*/}
             </div>
             {searchResults.length > 0 && (
                 <div className={styles['search-results-container']}>

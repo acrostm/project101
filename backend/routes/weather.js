@@ -29,8 +29,8 @@ router.get('/getWeather', async (req, res) => {
 router.post('/getWeatherByCityName', async (req, res) => {
     try {
         // 使用 Axios 发起请求到 OpenWeather API
+        // console.log(req.body);
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${req.body.cityName}&units=Metric&appid=${config.openWeatherApiKey}`);
-
         // 提取所需的天气数据
         const weatherData = {
             temperature: response.data.main.temp,
@@ -45,7 +45,7 @@ router.post('/getWeatherByCityName', async (req, res) => {
         res.json(weatherData);
 
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        // console.error('Error fetching weather data:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
