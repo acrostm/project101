@@ -51,7 +51,7 @@ function App() {
     };
 
     const getUserIP = async () => {
-        await axios.get(`https://geo.ipify.org/api/v2/country,city,vpn?apiKey=at_KCK8e5db8uFnjQzQHn4Oi7OGzpBq6`)
+        await axios.get('/userInfo/userIP')
             .then(res => {
                 setUserInfo(res.data);
             })

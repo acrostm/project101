@@ -6,7 +6,10 @@ const router = express.Router();
 router.get('/userIP', async (req, res, next) => {
     try {
         const ip = req.ip;
-        res.json({ ip: ip });
+        const url = `https://geo.ipify.org/api/v2/country,city,vpn?apiKey=${config.ipifyApiKey}&ipAddress=${ip}`;
+        const response = await axios.get(url);
+        const data = response.data;
+        res.json(data);
     } catch (error) {
         console.error('Error fetching user data:', error);
         res.status(500).json({ error: 'Server error' });
