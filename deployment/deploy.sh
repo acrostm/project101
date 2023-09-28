@@ -31,7 +31,7 @@ if [ "$CURRENT_SHELL" = "/bin/bash" ]; then
   screen -dmS frontend bash -c "npm start; exec bash"
   screen -dmS backend bash -c "npm start; exec bash"
 
-elif [ "$CURRENT_SHELL" = "/bin/zsh" ]; then
+elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   echo "当前Shell是Zsh:"
   # 在Zsh中执行操作
   # 示例操作：输出Zsh特定的信息
