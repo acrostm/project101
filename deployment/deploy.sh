@@ -55,8 +55,7 @@ elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   npm install
   screen -dmS backend npm start
 
+  echo "> React and Express service started /\ turn to https:www.jiachzha.top to check it out!"
 else
   echo "未知Shell: $CURRENT_SHELL"
 fi
-
-echo "> React and Express service started /\ turn to https:www.jiachzha.top to check it out!"
