@@ -28,8 +28,9 @@ if [ "$CURRENT_SHELL" = "/bin/bash" ]; then
   npm install
 
   # 分别进入 screen 会话并启动服务
-  screen -dmS frontend bash -c "npm start; exec bash"
-  screen -dmS backend bash -c "npm start; exec bash"
+  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+  screen -dmS frontend bash -c "cd /home/jiachzha/github/project101/frontend && serve -S build; exec bash"
+  screen -dmS backend bash -c "cd /home/jiachzha/github/project101/backend && npm start; exec bash"
 
 elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   echo "当前Shell是Zsh:"
@@ -49,8 +50,9 @@ elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   npm install
 
   # 分别进入 screen 会话并启动服务
-  screen -dmS frontend bash -c "npm start; exec bash"
-  screen -dmS backend bash -c "npm start; exec bash"
+  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+  screen -dmS frontend bash -c "cd /home/jiachzha/github/project101/frontend && serve -S build; exec bash"
+  screen -dmS backend bash -c "cd /home/jiachzha/github/project101/backend && npm start; exec bash"
 
 else
   echo "未知Shell: $CURRENT_SHELL"
