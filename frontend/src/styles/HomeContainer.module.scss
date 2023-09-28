@@ -91,11 +91,25 @@ h1 {
   background-color: rgba(138, 138, 138, 0.4);
 
   .bottom {
+    position: relative;
     display: flex;
     justify-content: space-evenly;
     vertical-align: bottom;
     margin: 1em auto;
     padding: 1em;
+
+    .mark {
+      bottom: 0;
+      font-weight: 700;
+    }
+
+    .flag_container{
+      .flag {
+        margin-left: 30%;
+        width: 3rem;
+        height: auto;
+      }
+    }
   }
 }
 

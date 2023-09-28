@@ -102,11 +102,11 @@ function App() {
                     <div className={styles.bottom}>
                         <div className={styles.ip}>
                             <p>{userInfo.ip}</p>
-                            <p className={styles.bold}>IP Address</p>
+                            <p className={styles.mark}>IP Address</p>
                         </div>
-                        <div className={styles.emoji}>
-                            <img src={userInfo.country_flag}  alt={`country flag`} />
-                            <p className={styles.bold}>Internet Service Provider</p>
+                        <div  className={styles.flag_container}>
+                            <img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />
+                            <p className={styles.mark}>Country Flag</p>
                         </div>
                     </div>
                 </div>
