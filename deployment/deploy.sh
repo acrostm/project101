@@ -4,9 +4,6 @@
 FRONTEND_HOME="/home/jiachzha/github/project101/frontend"
 BACKEND_HOME="/home/jiachzha/github/project101/backend"
 
-# 检查当前目录是否为所需目录
-CURRENT_DIR=$(pwd)
-
 # 检查当前Shell类型
 CURRENT_SHELL="$SHELL"
 
@@ -22,15 +19,14 @@ if [ "$CURRENT_SHELL" = "/bin/bash" ]; then
   cd "$FRONTEND_HOME" || exit
   npm install
   npm run build
+  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+  screen -dmS frontend serve -S build
 
   # 进入后端目录
   cd "$BACKEND_HOME" || exit
   npm install
+  screen -dmS backend npm start
 
-  # 分别进入 screen 会话并启动服务
-  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
-  screen -dmS frontend bash -c "cd /home/jiachzha/github/project101/frontend && serve -S build; exec bash"
-  screen -dmS backend bash -c "cd /home/jiachzha/github/project101/backend && npm start; exec bash"
 
 elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   echo "当前Shell是Zsh:"
@@ -44,20 +40,14 @@ elif [ "$CURRENT_SHELL" = "/usr/bin/zsh" ]; then
   cd "$FRONTEND_HOME" || exit
   npm install
   npm run build
+  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+  screen -dmS frontend serve -S build
 
   # 进入后端目录
   cd "$BACKEND_HOME" || exit
   npm install
-
-  # 分别进入 screen 会话并启动服务
-  screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
-  screen -dmS frontend bash -c "cd /home/jiachzha/github/project101/frontend && serve -S build; exec bash"
-  screen -dmS backend bash -c "cd /home/jiachzha/github/project101/backend && npm start; exec bash"
+  screen -dmS backend npm start
 
 else
   echo "未知Shell: $CURRENT_SHELL"
 fi
-
-# 共同的操作
-# 示例操作：输出通用信息
-echo "通用操作:"
