@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/userIP', async (req, res, next) => {
     try {
         const ip = req.ip;
-        const url = `https://geo.ipify.org/api/v2/country,city,vpn?apiKey=${config.ipifyApiKey}&ipAddress=${ip}`;
+        const url = `http://api.ipstack.com/${ip}?access_key=${config.ipstackApiKey}`;
         const response = await axios.get(url);
         const data = response.data;
         res.json(data);

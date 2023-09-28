@@ -91,7 +91,7 @@ function App() {
                     </div>
                     <div className={styles.line}></div>
                     <div className={styles.location}>
-                        {userInfo.location && <h1>{userInfo.location.city}, {userInfo.location.region} {userInfo.location.country}</h1>}
+                        {userInfo.city && <h1>{userInfo.city}, {userInfo.region_name} {userInfo.country_name}</h1>}
                         <p className={styles.bold}>Location</p>
                     </div>
                     <div className={styles.description}>
@@ -104,8 +104,8 @@ function App() {
                             <p>{userInfo.ip}</p>
                             <p className={styles.bold}>IP Address</p>
                         </div>
-                        <div className={styles.isp}>
-                            <p>{userInfo.isp}</p>
+                        <div className={styles.emoji}>
+                            <img src={userInfo.country_flag}  alt={`country flag`} />
                             <p className={styles.bold}>Internet Service Provider</p>
                         </div>
                     </div>
