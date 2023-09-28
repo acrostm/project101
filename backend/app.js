@@ -20,6 +20,9 @@ app.use(configureCors()); // 使用CORS中间件
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// 添加中间件来处理代理服务器的IP地址
+app.set('trust proxy', true);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

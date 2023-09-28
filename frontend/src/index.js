@@ -17,7 +17,7 @@ if(reg.test(hostname)) {
 }
 else {
       //动态请求地址             协议                    主机        端口
-    axios.defaults.baseURL = protocol + "//" + 'api.'+ hostname.slice(1).join('.');
+    axios.defaults.baseURL = "https://api.jiachzha.top";
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
