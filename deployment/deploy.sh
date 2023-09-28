@@ -4,6 +4,9 @@
 FRONTEND_HOME="/home/jiachzha/github/project101/frontend"
 BACKEND_HOME="/home/jiachzha/github/project101/backend"
 
+
+CURRENT_SHELL="$SHELL"
+
 if [ "$CURRENT_SHELL" = "/bin/bash" ]; then
   echo "当前Shell是Bash:"
   # 在Bash中执行操作
