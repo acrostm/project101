@@ -6,12 +6,6 @@ BACKEND_HOME="/home/jiachzha/github/project101/backend"
 
 # 检查当前目录是否为所需目录
 CURRENT_DIR=$(pwd)
-EXPECTED_DIR="/home/jiachzha/github/project101/"
-
-if [ "$CURRENT_DIR" != "$EXPECTED_DIR" ]; then
-  echo "当前目录不是 $EXPECTED_DIR，请进入该目录后再运行此脚本。"
-  exit 1
-fi
 
 # 检查当前Shell类型
 CURRENT_SHELL="$SHELL"
