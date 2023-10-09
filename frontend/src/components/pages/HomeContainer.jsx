@@ -105,8 +105,9 @@ function App() {
                             <p className={styles.mark}>IP Address</p>
                         </div>
                         <div  className={styles.flag_container}>
-                            <img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />
+                            {/*<img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />*/}
                             <p className={styles.mark}>Country Flag</p>
+
                         </div>
                     </div>
                 </div>
