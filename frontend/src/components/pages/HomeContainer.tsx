@@ -1,31 +1,49 @@
-import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+/// <reference types="react-scripts" />
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from '../../styles/HomeContainer.module.scss';
-import axios from 'axios'
+import axios from 'axios';
+
+interface WeatherData {
+    temperature: number;
+    weatherMain: string;
+}
+
+interface TimeData {
+    // Define the properties you expect in the time data.
+}
+
+interface SearchResult {
+    // Define the properties you expect in a search result.
+}
+
+interface UserInfo {
+    city: string;
+    region_name: string;
+    country_name: string;
+    ip: string;
+    location: {
+        country_flag: string;
+    }
+}
 
 function App() {
-    const [weatherData, setWeatherData] = useState({}); // store weather data
-    const [timeData, setTimeData] = useState({}); // store time data
-    const [searchResults, setSearchResults] = useState([]); // 存储搜索结果
-    const [searchedCity, setSearchedCity] = useState(""); // 存储显示的城市名称
-    const [userInfo, setUserInfo] = useState(""); // 存储用户IP
-
-
+    const [weatherData, setWeatherData] = useState<WeatherData>({temperature: 0, weatherMain: ""});
+    const [timeData, setTimeData] = useState<TimeData>({});
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([]); // Update to an array of SearchResult
+    const [searchedCity, setSearchedCity] = useState<string>("");
+    const [userInfo, setUserInfo] = useState<UserInfo>({city: "Burnaby", region_name: "British Columbia", country_name: "Canada", ip: "1.1.1.1", location: {country_flag: "https://assets.ipstack.com/flags/au.svg"}}); // Update to UserInfo type
 
     useEffect(() => {
         getUserIP();
         handleSearchCity('Burnaby');
     }, []);
 
-
-
-    const handleSearchCity = (city) => {
+    const handleSearchCity = (city: string) => {
         if (!city) {
-            return; // 如果城市名为空，不执行搜索
+            return;
         }
 
-
-        axios.post('/weather/getWeatherByCityName', {cityName: city})
+        axios.post('/weather/getWeatherByCityName', { cityName: city })
             .then(res => {
                 setWeatherData(res.data);
                 console.log(weatherData);
@@ -34,16 +52,16 @@ function App() {
                 console.error('Error fetching weather data:', error);
             });
 
-        setSearchResults([]); // close the dropdown
-        setSearchedCity(""); // 清空搜索框中的城市名称
-    }
-    const searchLocation = (e) => {
+        setSearchResults([]);
+        setSearchedCity("");
+    };
+
+    const searchLocation = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
-        // 发送搜索请求
         axios.post('/searchCity', { input: value })
             .then((res) => {
-                setSearchResults(res.data.cityNames); // 更新搜索结果
+                setSearchResults(res.data.cityNames);
             })
             .catch((error) => {
                 console.error('Error searching cities:', error);
@@ -60,7 +78,6 @@ function App() {
             });
     }
 
-
     return (
         <div className={styles.app}>
             <div className={styles.search}>
@@ -69,16 +86,19 @@ function App() {
                     type="text"
                     placeholder="Search City"
                     value={searchedCity}
-                    onChange={(e) => setSearchedCity(e.target.value)} // 更新 searchedCity
-                    onInput={searchLocation} // 添加 onInput 事件处理程序
+                    onChange={searchLocation}
                 />
             </div>
             <div className="search-results-container">
                 {searchResults.length > 0 && (
                     <div className={styles['search-results-container']}>
                         {searchResults.map((result, index) => (
-                            <div key={index} className={styles['search-result']} onClick={() => handleSearchCity(result.split(',')[0].trim())}>
-                                {result}
+                            <div key={index} className={styles['search-result']} onClick={() => {
+                                if (typeof result === 'string') {
+                                    handleSearchCity(result.split(',')[0].trim());
+                                }
+                            }}>
+                                {/*{result} */}
                             </div>
                         ))}
                     </div>
@@ -101,13 +121,12 @@ function App() {
                 <div className={styles.bottom_container}>
                     <div className={styles.bottom}>
                         <div className={styles.ip}>
-                            <p>{userInfo.ip}</p>
+                            <p>{userInfo?.ip}</p>
                             <p className={styles.mark}>IP Address</p>
                         </div>
-                        <div  className={styles.flag_container}>
-                            {/*<img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />*/}
+                        <div className={styles.flag_container}>
+                            <img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />
                             <p className={styles.mark}>Country Flag</p>
-
                         </div>
                     </div>
                 </div>
