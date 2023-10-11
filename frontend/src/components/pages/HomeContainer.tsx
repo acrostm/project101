@@ -31,7 +31,14 @@ function App() {
     const [timeData, setTimeData] = useState<TimeData>({});
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]); // Update to an array of SearchResult
     const [searchedCity, setSearchedCity] = useState<string>("");
-    const [userInfo, setUserInfo] = useState<UserInfo>({city: "Burnaby", region_name: "British Columbia", country_name: "Canada", ip: "1.1.1.1", location: {country_flag: "https://assets.ipstack.com/flags/au.svg"}}); // Update to UserInfo type
+    const [userInfo, setUserInfo] = useState<UserInfo>(
+        {
+            city: "Burnaby",
+            region_name: "British Columbia",
+            country_name: "Canada",
+            ip: "1.1.1.1",
+            location: {country_flag: "https://assets.ipstack.com/flags/us.svg"}
+        }); // Update to UserInfo type
 
     useEffect(() => {
         getUserIP();
