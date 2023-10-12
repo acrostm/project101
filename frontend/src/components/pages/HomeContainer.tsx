@@ -29,7 +29,7 @@ interface UserInfo {
 function App() {
     const [weatherData, setWeatherData] = useState<WeatherData>({temperature: 0, weatherMain: ""});
     const [timeData, setTimeData] = useState<TimeData>({});
-    const [searchResults, setSearchResults] = useState<SearchResult[]>([]); // Update to an array of SearchResult
+    const [searchResults, setSearchResults] = useState<string[]>([]); // Update to an array of SearchResult
     const [searchedCity, setSearchedCity] = useState<string>("");
     const [userInfo, setUserInfo] = useState<UserInfo>(
         {
@@ -101,11 +101,9 @@ function App() {
                     <div className={styles['search-results-container']}>
                         {searchResults.map((result, index) => (
                             <div key={index} className={styles['search-result']} onClick={() => {
-                                if (typeof result === 'string') {
-                                    handleSearchCity(result.split(',')[0].trim());
-                                }
+                                handleSearchCity(result.split(',')[0].trim());
                             }}>
-                                {/*{result} */}
+                                {result}
                             </div>
                         ))}
                     </div>
@@ -118,7 +116,10 @@ function App() {
                     </div>
                     <div className={styles.line}></div>
                     <div className={styles.location}>
-                        {userInfo.city && <h1>{userInfo.city}, {userInfo.region_name} {userInfo.country_name}</h1>}
+                        {userInfo.city && <h1>{userInfo.city}, {userInfo.region_name} {userInfo.country_name} </h1>}
+                        <div className={styles.flag_container}>
+                            <img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />
+                        </div>
                         <p className={styles.bold}>Location</p>
                     </div>
                     <div className={styles.description}>
