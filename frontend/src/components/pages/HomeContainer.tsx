@@ -26,7 +26,7 @@ interface UserInfo {
     }
 }
 
-function App() {
+function Home() {
     const [weatherData, setWeatherData] = useState<WeatherData>({temperature: 0, weatherMain: ""});
     const [timeData, setTimeData] = useState<TimeData>({});
     const [searchResults, setSearchResults] = useState<string[]>([]); // Update to an array of SearchResult
@@ -117,10 +117,6 @@ function App() {
                     <div className={styles.line}></div>
                     <div className={styles.location}>
                         {userInfo.city && <h1>{userInfo.city}, {userInfo.region_name} {userInfo.country_name} </h1>}
-                        <div className={styles.flag_container}>
-                            <img className={styles.flag} src={userInfo.location.country_flag}  alt={"country flag"} />
-                        </div>
-                        <p className={styles.bold}>Location</p>
                     </div>
                     <div className={styles.description}>
                         {weatherData.weatherMain ? <p>{weatherData.weatherMain}</p> : null}
@@ -143,4 +139,4 @@ function App() {
     );
 }
 
-export default App;
+export default Home;
