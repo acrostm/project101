@@ -8,10 +8,6 @@ interface WeatherData {
     weatherMain: string;
 }
 
-interface TimeData {
-    // Define the properties you expect in the time data.
-}
-
 interface SearchResult {
     // Define the properties you expect in a search result.
 }
@@ -28,9 +24,9 @@ interface UserInfo {
 
 function Home() {
     const [weatherData, setWeatherData] = useState<WeatherData>({temperature: 0, weatherMain: ""});
-    const [timeData, setTimeData] = useState<TimeData>({});
     const [searchResults, setSearchResults] = useState<string[]>([]); // Update to an array of SearchResult
     const [searchedCity, setSearchedCity] = useState<string>("");
+    const [currentCity, setCurrentCity] = useState<string>("");
     const [userInfo, setUserInfo] = useState<UserInfo>(
         {
             city: "Burnaby",
@@ -41,7 +37,7 @@ function Home() {
         }); // Update to UserInfo type
 
     useEffect(() => {
-        getUserIP();
+        getUserIP().then(r => {});
         handleSearchCity('Burnaby');
     }, []);
 
@@ -49,11 +45,11 @@ function Home() {
         if (!city) {
             return;
         }
-
+        setCurrentCity(city);
         axios.post('/weather/getWeatherByCityName', { cityName: city })
             .then(res => {
                 setWeatherData(res.data);
-                console.log(weatherData);
+                // console.log(weatherData);
             })
             .catch(error => {
                 console.error('Error fetching weather data:', error);
@@ -93,7 +89,8 @@ function Home() {
                     type="text"
                     placeholder="Search City"
                     value={searchedCity}
-                    onChange={searchLocation}
+                    onChange={(e) => setSearchedCity(e.target.value)} // 更新 searchedCity
+                    onInput={searchLocation}
                 />
             </div>
             <div className="search-results-container">
@@ -112,7 +109,8 @@ function Home() {
             <div className={styles.container}>
                 <div className={styles.top}>
                     <div className={styles.temp}>
-                        <p>Local {weatherData.temperature} °C</p>
+                        {currentCity !== "Burnaby" && <p>{currentCity} {weatherData.temperature} °C</p>}
+                        {currentCity === "Burnaby" && <p>Local {weatherData.temperature} °C</p>}
                     </div>
                     <div className={styles.line}></div>
                     <div className={styles.location}>
