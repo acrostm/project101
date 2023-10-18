@@ -2,6 +2,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from '../../styles/HomeContainer.module.scss';
 import axios from 'axios';
+import RealTimeClock from "../functions/RealTime";
 
 interface WeatherData {
     temperature: number;
@@ -105,6 +106,9 @@ function Home() {
                         ))}
                     </div>
                 )}
+            </div>
+            <div className={styles.time}>
+                <RealTimeClock/>
             </div>
             <div className={styles.container}>
                 <div className={styles.top}>

@@ -157,3 +157,18 @@ h1 {
     border-radius: 1px;
   }
 }
+
+.time {
+  color: #fff;
+  float: right;
+  margin-right: 2rem;
+  background-color: rgba(134, 133, 133, 0.48);
+  border-radius: 30px;
+  padding: 0.6em;
+  border: 1px solid rgba(255, 255, 255, 0.43);
+  h1 {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+  }
+}
