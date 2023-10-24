@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 let infoRouter = require('./routes/info');
 var weatherRouter = require('./routes/weather'); // 引入天气路由
 var searchCityRouter = require('./routes/cityAutocomplete'); // 引入天气路由
@@ -30,7 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/userInfo', infoRouter);
 app.use('/weather', weatherRouter); // 使用天气路由
 app.use('/searchCity', searchCityRouter);
