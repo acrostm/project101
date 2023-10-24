@@ -29,10 +29,24 @@ model profile {
 }
 
 model user {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique(map: "User_email_key")
+  id       Int       @id @default(autoincrement())
+  email    String    @unique(map: "User_email_key")
   name     String?
   password String?
   post     post[]
-  profile  profile?
+  profile  profile[]
+  memo     memo[]
+}
+
+model memo {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  authorId  Int
+  user      user     @relation(fields: [authorId], references: [id], map: "Memo_authorId_fkey")
+
+  @@index([authorId], map: "Memo_authorId_fkey")
 }
