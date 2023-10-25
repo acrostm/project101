@@ -5,6 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "prisma": {
+    "seed": "npx ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.5.0",
     "cookie-parser": "~1.4.4",
@@ -17,8 +20,12 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.5",
+    "@types/debug": "^4.1.10",
     "@types/express": "^4.17.20",
-    "@types/node": "^20.8.7",
+    "@types/http-errors": "^2.0.3",
+    "@types/morgan": "^1.9.7",
+    "@types/node": "^20.8.8",
     "axios": "^1.5.0",
     "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
